@@ -15,7 +15,7 @@ passport.deserializeUser((id, done) => {
   });
 });
 
-// middleware to use google strategy
+// middleware to use google strategy //
 passport.use(
   new GoogleStrategy(
     {
