@@ -16,12 +16,14 @@
   "author": "John Kirch",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.20.0",
     "concurrently": "^7.1.0",
     "cookie-session": "^2.0.0",
     "express": "^4.17.3",
     "mongoose": "^6.3.0",
     "passport": "^0.5.2",
-    "passport-google-oauth20": "^2.0.0"
+    "passport-google-oauth20": "^2.0.0",
+    "stripe": "^8.218.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
