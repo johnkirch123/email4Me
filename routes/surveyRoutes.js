@@ -1,4 +1,8 @@
+const _ = require("lodash");
+const Path = require("path-parser");
+const { URL } = require("url");
 const mongoose = require("mongoose");
+
 const requireLogin = require("../middleware/requireLogin");
 const requireCredits = require("../middleware/requireCredits");
 const Mailer = require("../services/Mailer");
@@ -9,6 +13,10 @@ const Survey = mongoose.model("surveys");
 module.exports = (app) => {
   app.get("/api/surveys/thanks", (req, res) => {
     res.send("Thanks for voting!");
+  });
+
+  app.post("/api/surveys/webhooks", (req, res) => {
+    const events = _.map(req.body, (event) => {});
   });
 
   app.post("/api/surveys", requireLogin, requireCredits, async (req, res) => {
@@ -36,10 +44,5 @@ module.exports = (app) => {
     } catch (err) {
       res.status(422).send(err);
     }
-  });
-
-  app.post("/api/surveys/webhooks", (req, res) => {
-    console.log(req.body);
-    res.send({});
   });
 };
