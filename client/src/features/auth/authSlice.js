@@ -1,28 +1,39 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const initialState = {};
+const initialState = {
+  googleId: '',
+  credits: 0,
+  isError: false,
+  isSuccess: false,
+  isLoading: false,
+  message: ''
+};
 
-export const fetchUser = createAsyncThunk('user/fetchUser', async () => {
+export const fetchUser = createAsyncThunk('fetch/user', async () => {
   const response = await axios.get('/api/current_user');
-  console.log(response.data);
   return response.data;
 });
 
-export const logoutUser = createAsyncThunk('/api/logout', () => {
-  console.log('Logged Out');
-});
-
-const authSlice = createSlice({
+export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    authenticateUser: {
-      reducer: (state, action) => {
-        console.log(`state: ${state}, action: ${action}`);
-      }
+    updateUser: (state, action) => {
+      const user = {
+        googleId: action.payload.googleId,
+        credits: action.payload.credits
+      };
+      state.push(user);
     }
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchUser.fulfilled, (state, action) => {
+      return action.payload;
+    });
   }
 });
+
+export const selectUser = (state) => state.user;
 
 export default authSlice.reducer;

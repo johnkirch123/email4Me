@@ -1,40 +1,51 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { fetchSurveys } from "../../actions";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  fetchSurveys,
+  getAllSurveys,
+  getSurveyStatus,
+  getSurveyError
+} from '../../features/surveys/surveySlice';
 
-class SurveyList extends Component {
-  componentDidMount() {
-    this.props.fetchSurveys();
-  }
+const SurveyList = () => {
+  const dispatch = useDispatch();
+  // const [surveys, setSurveys] = useState([]);
+  const surveys = useSelector(getAllSurveys);
+  const surveyStatus = useSelector(getSurveyStatus);
+  const error = useSelector(getSurveyError);
 
-  renderSurveys() {
-    return this.props.surveys.reverse().map((survey) => {
+  useEffect(() => {
+    if (surveyStatus === 'idle') dispatch(fetchSurveys());
+    // dispatch(fetchSurveys()).then((res) => setSurveys(res.payload));
+  }, [surveyStatus, dispatch]);
+
+  let content;
+  if (surveyStatus === 'loading') {
+    content = <p>"Loading..."</p>;
+  } else if (surveyStatus === 'succeeded') {
+    content = surveys.reverse().map((survey) => {
       return (
-        <div className="card blue-grey darken-1" key={survey._id}>
-          <div className="card-content white">
-            <span className="card-title">{survey.title}</span>
+        <div className='card blue-grey darken-1' key={survey._id}>
+          <div className='card-content white'>
+            <span className='card-title'>{survey.title}</span>
             <p>{survey.body}</p>
 
-            <p className="right">
+            <p className='right'>
               Sent On: {new Date(survey.dateSent).toLocaleDateString()}
             </p>
           </div>
-          <div className="card-action">
+          <div className='card-action'>
             <a>Yes: {survey.yes}</a>
             <a>No: {survey.no}</a>
           </div>
         </div>
       );
     });
+  } else if (surveyStatus === 'failed') {
+    content = <p>{error}</p>;
   }
 
-  render() {
-    return <div>{this.renderSurveys()}</div>;
-  }
-}
+  return <div>{content}</div>;
+};
 
-function mapStateToProps({ surveys }) {
-  return { surveys };
-}
-
-export default connect(mapStateToProps, { fetchSurveys })(SurveyList);
+export default SurveyList;
