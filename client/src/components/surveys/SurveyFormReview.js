@@ -1,16 +1,20 @@
-import React from "react";
-import { connect } from "react-redux";
-import formFields from "./formFields";
-import * as actions from "../../actions";
-import { withRouter } from "react-router-dom";
+import React from 'react';
+import formFields from './formFields';
+import { withRouter } from 'react-router-dom';
+import { getForm, submitSurvey } from '../../features/surveys/surveySlice';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-const SurveyFormReview = ({ onCancel, formValues, submitSurvey, history }) => {
+const SurveyFormReview = ({ history, onCancel }) => {
+  const dispatch = useDispatch();
+  const { values } = useSelector(getForm);
+
   const renderContent = () => {
     return formFields.map(({ name, label }) => {
       return (
         <div key={name}>
           <label>{label}</label>
-          <div>{formValues[name]}</div>
+          <div>{values[name]}</div>
         </div>
       );
     });
@@ -20,25 +24,19 @@ const SurveyFormReview = ({ onCancel, formValues, submitSurvey, history }) => {
       <h5>Please confirm your entries</h5>
       <div>{renderContent()}</div>
       <button
-        className="yellow darken-3 white-text btn-flat"
+        className='yellow darken-3 white-text btn-flat'
         onClick={onCancel}
       >
         Back
       </button>
       <button
-        className="green btn-flat right white-text"
-        onClick={() => submitSurvey(formValues, history)}
+        className='green btn-flat right white-text'
+        onClick={() => dispatch(submitSurvey({ values, history }))}
       >
-        Send Survey <i className="material-icons right">email</i>
+        Send Survey <i className='material-icons right'>email</i>
       </button>
     </div>
   );
 };
 
-function mapStateToProps(state) {
-  return {
-    formValues: state.form.surveyForm.values,
-  };
-}
-
-export default connect(mapStateToProps, actions)(withRouter(SurveyFormReview));
+export default withRouter(SurveyFormReview);

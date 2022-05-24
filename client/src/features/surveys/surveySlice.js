@@ -12,12 +12,14 @@ export const fetchSurveys = createAsyncThunk('fetch/surveys', async () => {
   return response.data;
 });
 
-export const submitSurvey = (values, history) =>
-  createAsyncThunk('submit/survey', async () => {
+export const submitSurvey = createAsyncThunk(
+  'submit/survey',
+  async ({ values, history }) => {
     const response = await axios.post('/api/surveys', values);
     history.push('/surveys');
     return response.data;
-  });
+  }
+);
 
 const surveySlice = createSlice({
   name: 'surveys',
@@ -38,5 +40,6 @@ const surveySlice = createSlice({
 export const getAllSurveys = (state) => state.surveys.surveys;
 export const getSurveyStatus = (state) => state.surveys.status;
 export const getSurveyError = (state) => state.surveys.error;
+export const getForm = (state) => state.form.surveyForm;
 
 export default surveySlice.reducer;
