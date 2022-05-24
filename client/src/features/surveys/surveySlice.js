@@ -12,14 +12,12 @@ export const fetchSurveys = createAsyncThunk('fetch/surveys', async () => {
   return response.data;
 });
 
-export const submitSurvey = createAsyncThunk(
-  'submit/survey',
-  async (history, values) => {
+export const submitSurvey = (values, history) =>
+  createAsyncThunk('submit/survey', async () => {
     const response = await axios.post('/api/surveys', values);
     history.push('/surveys');
     return response.data;
-  }
-);
+  });
 
 const surveySlice = createSlice({
   name: 'surveys',

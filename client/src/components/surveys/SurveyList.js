@@ -15,8 +15,8 @@ const SurveyList = () => {
   const error = useSelector(getSurveyError);
 
   useEffect(() => {
-    if (surveyStatus === 'idle') dispatch(fetchSurveys());
-  }, [surveyStatus, dispatch]);
+    dispatch(fetchSurveys());
+  }, [dispatch]);
 
   let content;
   if (surveyStatus === 'loading') {
