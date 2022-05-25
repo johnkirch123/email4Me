@@ -1,6 +1,6 @@
 # Email4Me
 
-![Email4Me Image](https://johnwkirch.com/img/email4me.png)
+![Email4Me Image](https://johnwkirch.com/img/eamil4me.png)
 
 This is a project from an older tutorial series that was broken and needed some refactoring and updating. This is part of the [Email4Me App](https://secret-tundra-67506.herokuapp.com/) project for my portfolio.
 
