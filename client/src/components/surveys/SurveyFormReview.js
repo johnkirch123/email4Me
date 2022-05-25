@@ -2,8 +2,7 @@ import React from 'react';
 import formFields from './formFields';
 import { withRouter } from 'react-router-dom';
 import { getForm, submitSurvey } from '../../features/surveys/surveySlice';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 const SurveyFormReview = ({ history, onCancel }) => {
   const dispatch = useDispatch();

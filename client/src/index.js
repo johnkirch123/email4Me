@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import App from './components/App';
 import { store } from './app/store';
 import { fetchUser } from './features/auth/authSlice';
+import './assets/css/style.css';
 
 store.dispatch(fetchUser());
 

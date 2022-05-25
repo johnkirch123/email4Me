@@ -1,17 +1,15 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const initialState = {
-  googleId: '',
-  credits: 0,
-  isError: false,
-  isSuccess: false,
-  isLoading: false,
-  message: ''
-};
+const initialState = '';
 
 export const fetchUser = createAsyncThunk('fetch/user', async () => {
   const response = await axios.get('/api/current_user');
+  return response.data;
+});
+
+export const handleToken = createAsyncThunk('handle/token', async (token) => {
+  const response = await axios.post('/api/stripe', token);
   return response.data;
 });
 
@@ -28,9 +26,13 @@ export const authSlice = createSlice({
     }
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchUser.fulfilled, (state, action) => {
-      return action.payload;
-    });
+    builder
+      .addCase(fetchUser.fulfilled, (state, action) => {
+        return action.payload;
+      })
+      .addCase(handleToken.fulfilled, (state, action) => {
+        return action.payload;
+      });
   }
 });
 

@@ -1,0 +1,23 @@
+.landing {
+  height: 95vh;
+  text-align: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+  font-size: 2em;
+  position: relative;
+
+  &__text--box {
+    position: absolute;
+    margin: 0;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &__text {
+    &--main {
+      font-size: 10rem;
+    }
+  }
+}

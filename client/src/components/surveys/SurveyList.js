@@ -15,8 +15,10 @@ const SurveyList = () => {
   const error = useSelector(getSurveyError);
 
   useEffect(() => {
-    dispatch(fetchSurveys());
-  }, [dispatch]);
+    if (surveyStatus === 'idle') {
+      dispatch(fetchSurveys());
+    }
+  }, [surveyStatus, dispatch]);
 
   let content;
   if (surveyStatus === 'loading') {
@@ -24,7 +26,7 @@ const SurveyList = () => {
   } else if (surveyStatus === 'succeeded') {
     content = [...surveys].reverse().map((survey) => {
       return (
-        <div className='card blue-grey darken-1' key={survey._id}>
+        <div className='card light-blue darken-1 z-depth-2' key={survey._id}>
           <div className='card-content white'>
             <span className='card-title'>{survey.title}</span>
             <p>{survey.body}</p>
@@ -34,8 +36,8 @@ const SurveyList = () => {
             </p>
           </div>
           <div className='card-action'>
-            <a>Yes: {survey.yes}</a>
-            <a>No: {survey.no}</a>
+            <a className=' white-text'>Yes: {survey.yes}</a>
+            <a className=' white-text'>No: {survey.no}</a>
           </div>
         </div>
       );
@@ -44,7 +46,7 @@ const SurveyList = () => {
     content = <p>{error}</p>;
   }
 
-  return <div>{content}</div>;
+  return <div className='container'>{content}</div>;
 };
 
 export default SurveyList;

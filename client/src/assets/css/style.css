@@ -1,0 +1,22 @@
+.header {
+  height: 5vh; }
+
+.landing {
+  height: 95vh;
+  text-align: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+  font-size: 2em;
+  position: relative; }
+  .landing__text--box {
+    position: absolute;
+    margin: 0;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%); }
+  .landing__text--main {
+    font-size: 10rem; }
+
+.survey__new {
+  padding-top: 10%; }

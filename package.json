@@ -26,6 +26,7 @@
     "passport": "^0.5.2",
     "passport-google-oauth20": "^2.0.0",
     "path-parser": "^6.1.0",
+    "sass": "^1.52.1",
     "sendgrid": "^5.2.3",
     "stripe": "^8.218.0"
   },

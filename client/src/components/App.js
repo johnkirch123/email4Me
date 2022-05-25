@@ -8,7 +8,7 @@ import SurveyNew from './surveys/SurveyNew';
 const App = () => {
   return (
     <BrowserRouter>
-      <div className='container'>
+      <div>
         <Header />
         <Route path='/' exact component={Landing} />
         <Route path='/surveys' exact component={Dashboard} />

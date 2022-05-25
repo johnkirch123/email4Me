@@ -33,14 +33,16 @@ const Header = () => {
   };
 
   return (
-    <nav>
-      <div className='nav-wrapper'>
-        <Link to={user ? '/surveys' : '/'} className='left brand-logo'>
-          Emaily
-        </Link>
-        <ul className='right'>{renderContent()}</ul>
-      </div>
-    </nav>
+    <div className='navbar-fixed header'>
+      <nav>
+        <div className='nav-wrapper light-blue darken-4 z-depth-3'>
+          <Link to={user ? '/surveys' : '/'} className='left brand-logo'>
+            Email4Me
+          </Link>
+          <ul className='right'>{renderContent()}</ul>
+        </div>
+      </nav>
+    </div>
   );
 };
 
